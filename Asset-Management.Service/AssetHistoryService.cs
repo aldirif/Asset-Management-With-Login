@@ -21,6 +21,7 @@ namespace Asset_Management.Service
             response.Location = entity.Location;
             response.PicId = entity.PicId;
             response.SendDate = entity.SendDate;
+            response.ReturnDate = entity.ReturnDate;
 
             var asset = _context.AssetEntities.Find(entity.AssetId);
             response.AssetName = asset.AssetName;

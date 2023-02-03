@@ -1,5 +1,6 @@
 ﻿using Asset_Management.Repository;
 using Asset_Management.ViewModel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Asset_Management.Service
 {
@@ -46,7 +47,17 @@ namespace Asset_Management.Service
             response.Specification = entity.Specification;
             response.SerialNumber = entity.SerialNumber;
             response.PurchaseYear = entity.PurchaseYear;
-            response.Used = entity.Used;
+
+            entity.AssetHistory = _context.AssetHistoryEntities.Where(x => x.AssetId == entity.Id).ToList();
+            if (entity.Used == true)
+            {
+                var pic = _context.PicEntities.Find(entity.AssetHistory.OrderBy(x => x.Id).Last().PicId);
+                response.Status = "Used By " + pic.FullName;
+            }
+            else
+            {
+                response.Status = "Available ";
+            }
             return response;
         }
 
