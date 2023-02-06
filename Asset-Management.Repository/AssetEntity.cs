@@ -37,5 +37,6 @@ namespace Asset_Management.Repository
             SerialNumber = model.SerialNumber;
             PurchaseYear = model.PurchaseYear;
         }
+
     }
 }
